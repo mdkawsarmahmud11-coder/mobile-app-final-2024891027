@@ -1,6 +1,6 @@
 # 🍽️ Recipe Explorer
 
-**A Flutter-Based Recipe Discovery Application**
+### A Flutter-Based Recipe Discovery Application
 
 Recipe Explorer is a mobile application developed using Flutter and Dart. It allows users to explore food categories, discover meals, view detailed cooking instructions, search for recipes, and save their favorite meals.
 
@@ -16,7 +16,7 @@ The application uses TheMealDB API to retrieve real recipe information.
 | Student ID | 2024891027 |
 | Project Name | Recipe Explorer |
 | University | Kyungsung University |
-| Course | Mobile Application Development |
+| Course | Mobile App Programming |
 | Development Framework | Flutter |
 | Programming Language | Dart |
 
@@ -59,7 +59,7 @@ Recipe Explorer uses the free TheMealDB API.
 
 https://www.themealdb.com/api/json/v1/1
 
-API endpoints used:
+**API endpoints used:**
 
 - Categories: `/categories.php`
 - Meals by category: `/filter.php?c=Seafood`
@@ -75,15 +75,16 @@ API Provider: [TheMealDB](https://www.themealdb.com/)
 
 The following screenshots show the main features of the Recipe Explorer application running on an iPhone 17 simulator.
 
-Once added, use these image paths:
-
 ### Home Screen
+
 ![Recipe Explorer Home Screen](screenshots/home_screen.png)
 
 ### Search Screen
+
 ![Recipe Explorer Search Screen](screenshots/search_screen.png)
 
 ### Favorites Screen
+
 ![Recipe Explorer Favorites Screen](screenshots/favorites_screen.png)
 
 ---
@@ -93,15 +94,12 @@ Once added, use these image paths:
 ```text
 lib/
 ├── main.dart
-│
 ├── models/
 │   ├── category.dart
 │   └── meal.dart
-│
 ├── services/
 │   ├── meal_api.dart
 │   └── favorites_storage.dart
-│
 ├── screens/
 │   ├── home_screen.dart
 │   ├── meal_list_screen.dart
@@ -109,13 +107,17 @@ lib/
 │   ├── search_screen.dart
 │   ├── favorites_screen.dart
 │   └── about_screen.dart
-│
 └── widgets/
     └── meal_card.dart
 
 assets/
 └── images/
     └── profile.jpg
+
+screenshots/
+├── home_screen.png
+├── search_screen.png
+└── favorites_screen.png
 ```
 
 ---
@@ -165,6 +167,18 @@ The main packages used in this project:
 
 ---
 
+## 🧪 Testing and Verification
+
+- Tested on iPhone 17 Simulator.
+- Verified category browsing and meal details.
+- Tested recipe search functionality.
+- Verified adding and removing favorites.
+- Confirmed favorite data persists after restarting the application.
+- Checked loading, error, and empty-result states.
+- Flutter analysis completed with no issues.
+
+---
+
 ## 🎯 Learning Objectives
 
 This project demonstrates practical knowledge of:
@@ -183,10 +197,10 @@ This project demonstrates practical knowledge of:
 
 ## 🎨 Application Design
 
-- Primary Color: Orange
-- Background Color: White
-- Design Style: Simple, clean, and user-friendly.
-- Platform: Mobile Application
+- **Primary Color:** Orange
+- **Background Color:** White
+- **Design Style:** Simple, clean, and user-friendly.
+- **Platform:** Mobile Application
 
 ---
 
