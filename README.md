@@ -73,7 +73,7 @@ API Provider: [TheMealDB](https://www.themealdb.com/)
 
 ## 📱 Application Screenshots
 
-Add your actual application screenshots to the `screenshots` folder in the project root.
+The following screenshots show the main features of the Recipe Explorer application running on an iPhone 17 simulator.
 
 Once added, use these image paths:
 
