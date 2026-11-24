@@ -16,7 +16,7 @@ The application uses TheMealDB API to retrieve real recipe information.
 | Student ID | 2024891027 |
 | Project Name | Recipe Explorer |
 | University | Kyungsung University |
-| Course | Mobile App Programming |
+| Course | Mobile App Design |
 | Development Framework | Flutter |
 | Programming Language | Dart |
 
