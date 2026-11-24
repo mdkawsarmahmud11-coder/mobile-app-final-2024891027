@@ -24,6 +24,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   // Search meals using the API
   Future<void> searchMeals() async {
+    if (isLoading) return;
+
     String query = searchController.text.trim();
 
     if (query.isEmpty) {
@@ -39,6 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
       isLoading = true;
       hasSearched = true;
       errorMessage = '';
+      meals = [];
     });
 
     try {
@@ -54,10 +57,24 @@ class _SearchScreenState extends State<SearchScreen> {
       if (!mounted) return;
 
       setState(() {
-        errorMessage = 'Unable to search meals. Please try again.';
+        errorMessage =
+            'Unable to search recipes. Please check your internet connection and try again.';
         isLoading = false;
       });
     }
+  }
+
+  // Clear search and reset results
+  void clearSearch() {
+    if (isLoading) return;
+
+    searchController.clear();
+
+    setState(() {
+      meals = [];
+      hasSearched = false;
+      errorMessage = '';
+    });
   }
 
   @override
@@ -76,7 +93,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
       body: Column(
         children: [
-
           // Search Box
           Padding(
             padding: const EdgeInsets.all(16),
@@ -91,15 +107,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    searchController.clear();
-
-                    setState(() {
-                      meals = [];
-                      hasSearched = false;
-                      errorMessage = '';
-                    });
-                  },
+                  onPressed: clearSearch,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -127,9 +135,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.all(14),
                 ),
-                child: const Text(
-                  'Search',
-                  style: TextStyle(fontSize: 16),
+                child: Text(
+                  isLoading ? 'Searching...' : 'Search',
+                  style: const TextStyle(fontSize: 16),
                 ),
               ),
             ),
@@ -147,16 +155,28 @@ class _SearchScreenState extends State<SearchScreen> {
                   )
                 : errorMessage.isNotEmpty
                     ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(errorMessage),
-                            const SizedBox(height: 12),
-                            ElevatedButton(
-                              onPressed: searchMeals,
-                              child: const Text('Retry'),
-                            ),
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.wifi_off,
+                                size: 45,
+                                color: Colors.orange,
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                errorMessage,
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 12),
+                              ElevatedButton(
+                                onPressed: searchMeals,
+                                child: const Text('Retry'),
+                              ),
+                            ],
+                          ),
                         ),
                       )
                     : !hasSearched
@@ -171,10 +191,32 @@ class _SearchScreenState extends State<SearchScreen> {
                           )
                         : meals.isEmpty
                             ? const Center(
-                                child: Text(
-                                  'No recipes found. Try another name.',
-                                  style: TextStyle(fontSize: 16),
-                                  textAlign: TextAlign.center,
+                                child: Padding(
+                                  padding: EdgeInsets.all(20),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.search_off,
+                                        size: 50,
+                                        color: Colors.orange,
+                                      ),
+                                      SizedBox(height: 12),
+                                      Text(
+                                        'No recipes found.',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 6),
+                                      Text(
+                                        'Try another recipe name, such as chicken or pasta.',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               )
                             : ListView.builder(
@@ -190,7 +232,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                     child: ListTile(
                                       contentPadding:
                                           const EdgeInsets.all(10),
-
                                       leading: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(10),
@@ -212,23 +253,19 @@ class _SearchScreenState extends State<SearchScreen> {
                                           },
                                         ),
                                       ),
-
                                       title: Text(
                                         meal.name,
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-
                                       subtitle: const Text(
                                         'Tap to view recipe',
                                       ),
-
                                       trailing: const Icon(
                                         Icons.arrow_forward_ios,
                                         color: Colors.orange,
                                       ),
-
                                       onTap: () {
                                         Navigator.push(
                                           context,
